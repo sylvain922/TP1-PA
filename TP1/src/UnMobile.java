@@ -5,7 +5,7 @@ public class UnMobile extends JPanel implements Runnable {
     int saLargeur, saHauteur, sonDebDessin;
     final int sonPas = 10, sonTemps = 50, sonCote = 40;
 
-    private static final Semaphore semaphore = new SemaphoreBinaire(1);
+    private static final Semaphore semaphore = new Semaphore(2);
 
     UnMobile(int telleLargeur, int telleHauteur) {
         super();
@@ -40,13 +40,13 @@ public class UnMobile extends JPanel implements Runnable {
                 Thread.sleep(sonTemps);
             }
 
-            // 1ère boucle : de 3/3 à 2/3
+            // 4ème boucle : de 3/3 à 2/3
             for (sonDebDessin = saLargeur - sonCote; sonDebDessin >= deuxTiers; sonDebDessin -= sonPas) {
                 repaint();
                 Thread.sleep(sonTemps);
             }
 
-            // 2ème boucle : de 2/3 à 1/3
+            // 5ème boucle : de 2/3 à 1/3
             semaphore.syncWait();
             for (sonDebDessin = deuxTiers; sonDebDessin >= unTiers; sonDebDessin -= sonPas) {
                 repaint();
@@ -54,7 +54,7 @@ public class UnMobile extends JPanel implements Runnable {
             }
             semaphore.syncSignal();
 
-            // 3ème boucle : de 1/3 à 0
+            // 6ème boucle : de 1/3 à 0
             for (sonDebDessin = unTiers; sonDebDessin >= 0; sonDebDessin -= sonPas) {
                 repaint();
                 Thread.sleep(sonTemps);
