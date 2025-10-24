@@ -27,6 +27,7 @@ public class UnMobile extends JPanel implements Runnable {
             }
 
             // 2ème boucle : de 1/3 à 2/3
+            // Section critique
             semaphore.syncWait();
             for (sonDebDessin = unTiers; sonDebDessin < deuxTiers; sonDebDessin += sonPas) {
                 repaint();
@@ -47,6 +48,7 @@ public class UnMobile extends JPanel implements Runnable {
             }
 
             // 5ème boucle : de 2/3 à 1/3
+            // Section critique
             semaphore.syncWait();
             for (sonDebDessin = deuxTiers; sonDebDessin >= unTiers; sonDebDessin -= sonPas) {
                 repaint();
